@@ -151,9 +151,10 @@ In this lab, you learn how to perform the following tasks:
      kubectl get services
 
      Result:
-     NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE
-     kubernetes ClusterIP 10.51.240.1 <none> 443/TCP 14m
-     nginx LoadBalancer 10.51.241.197 35.239.234.187 80:31096/TCP 6m
+     | NAME | TYPE | CLUSTER-IP | EXTERNAL-IP | PORT(S) | AGE |
+     | ---------- | ------------ | ------------- | -------------- | ------------ | --- |  
+     | kubernetes | ClusterIP | 10.51.240.1 | <none> | 443/TCP | 14m |
+     | nginx |LoadBalancer | 10.51.241.197 | 35.239.234.187 | 80:31096/TCP | 6m |
 
 # Lab : Google Cloud Fundamentals: Getting Started with App Engine
 
