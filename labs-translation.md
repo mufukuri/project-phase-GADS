@@ -1,4 +1,4 @@
-# Lab: Google Cloud Fundamentals: Getting Started with Compute Engine
+# Lab 1: Google Cloud Fundamentals: Getting Started with Compute Engine
 
 ## Objectives
 
@@ -68,7 +68,7 @@ b) Get the external IP of my-vm-1 instance
 
     Paste it into the address bar of a new browser tab. You will see your web server's home page, including your custom text.
 
-# Lab: Google Cloud Fundamentals: Getting Started with GKE
+# Lab 2: Google Cloud Fundamentals: Getting Started with GKE
 
 ## Objectives
 
@@ -159,7 +159,7 @@ In this lab, you learn how to perform the following tasks:
      | kubernetes | ClusterIP | 10.51.240.1 | <none> | 443/TCP | 14m |
      | nginx |LoadBalancer | 10.51.241.197 | 35.239.234.187 | 80:31096/TCP | 6m |
 
-# Lab : Google Cloud Fundamentals: Getting Started with App Engine
+# Lab 3: Google Cloud Fundamentals: Getting Started with App Engine
 
 ## Objectives
 
