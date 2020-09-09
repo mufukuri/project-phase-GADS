@@ -232,7 +232,7 @@ n this lab, you learn how to perform the following tasks:
 
       If prompted "Do you want to continue (Y/n)?", press Y and then Enter. This app deploy command uses the app.yaml file to identify project configuration.
 
-    - Launch your browser to view the app at http://YOUR_PROJECT_ID.appspot.com
+    - Launch your browser to view the app at
       https://qwiklabs-gcp-02-7502520b3295.uc.r.appspot.com/
 
       gcloud app browse
