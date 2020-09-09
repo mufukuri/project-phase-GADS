@@ -109,9 +109,10 @@ In this lab, you learn how to perform the following tasks:
   gcloud compute instances list
 
   Result:
-  NAME ZONE MACHINE_TYPE PREEMPTIBLE INTERNAL_IP EXTERNAL_IP STATUS
-  gke-webfrontend-default-pool-e911037c-q17j us-central1-a n1-standard-1 10.128.0.3 34.72.147.15 RUNNING
-  gke-webfrontend-default-pool-e911037c-r9lc us-central1-a n1-standard-1 10.128.0.2 35.226.189.62 RUNNING
+  | NAME | ZONE | MACHINE_TYPE | INTERNAL_IP | EXTERNAL_IP | STATUS |
+  | ----------------------------------------- | ------------- | ------------- | ----------- | ------------- | --------- |
+  |gke-webfrontend-default-pool-e911037c-q17j | us-central1-a | n1-standard-1 | 10.128.0.3 | 34.72.147.15 | RUNNING |
+  |gke-webfrontend-default-pool-e911037c-r9lc | us-central1-a | n1-standard-1 | 10.128.0.2 | 35.226.189.62 | RUNNING |
 
 3. Run and deploy a container
 
@@ -132,9 +133,11 @@ In this lab, you learn how to perform the following tasks:
      kubectl get services
 
      Result:
-     NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE
-     kubernetes ClusterIP 10.51.240.1 <none> 443/TCP 11m
-     nginx LoadBalancer 10.51.241.197 35.239.234.187 80:31096/TCP 2m56s
+
+     | NAME       | TYPE         | CLUSTER-IP    | EXTERNAL-IP    | PORT(S)      | AGE   |
+     | ---------- | ------------ | ------------- | -------------- | ------------ | ----- |
+     | kubernetes | ClusterIP    | 10.51.240.1   | <none>         | 443/TCP      | 14m   |
+     | nginx      | LoadBalancer | 10.51.241.197 | 35.239.234.187 | 80:31096/TCP | 2m56s |
 
    - Open a new web browser tab and paste your cluster's external IP address into the address bar. The default home page of the Nginx browser is displayed.
 
