@@ -68,27 +68,92 @@ b) Get the external IP of my-vm-1 instance
 
     Paste it into the address bar of a new browser tab. You will see your web server's home page, including your custom text.
 
-# Lab: GCP Fundamentals: Getting Started with Cloud Storage and Cloud SQL
+# Lab: Google Cloud Fundamentals: Getting Started with GKE
 
 ## Objectives
 
 In this lab, you learn how to perform the following tasks:
 
-- Create a Cloud Storage bucket and place an image into it.
+- Provision a Kubernetes cluster using Kubernetes Engine.
 
-- Create a Cloud SQL instance and configure it.
-
-- Connect to the Cloud SQL instance from a web server.
-
-- Use the image in the Cloud Storage bucket on a web page.
+- Deploy and manage Docker containers using kubectl.
 
 ## Steps
 
-1. Deploy a web server VM instance
-2. Create a Cloud Storage bucket using the gsutil command line
-3. Create the Cloud SQL instance
-4. Configure an application in a Compute Engine instance to use Cloud SQL
-5. Configure an application in a Compute Engine instance to use a Cloud Storage object
+1. Confirm that needed APIs are enabled
+
+- Confirm that both of these APIs are enabled:
+  Kubernetes Engine API: gcloud services list --available | grep 'Kubernetes Engine API'
+  Container Registry API: gcloud services list --available | grep 'Container Registry API'
+
+2. Start a Kubernetes Engine cluster
+
+- Place zone in MY_ZONe environment variable
+  export MY_ZONE=us-central1-a
+
+- Start a Kubernetes cluster managed by Kubernetes Engine. Name the cluster webfrontend and configure it to run 2 nodes:
+
+  gcloud container clusters create webfrontend --zone \$MY_ZONE --num-nodes 2
+
+- Check your installed version of Kubernetes using the kubectl version command:
+
+  kubectl version
+
+  Result:
+  Client Version: version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.0", GitCommit:"e19964183377d0ec2052d1f1fa930c4d7575bd50", GitTreeState:"clean", BuildDate:"2020-08-26T14:30:33Z", GoVersion:"go1.15",
+  Compiler:"gc", Platform:"linux/amd64"}
+  Server Version: version.Info{Major:"1", Minor:"15+", GitVersion:"v1.15.12-gke.2", GitCommit:"fb7add51f767aae42655d39972210dc1c5dbd4b3", GitTreeState:"clean", BuildDate:"2020-06-01T22:20:10Z", GoVersion:"go1.12.17b4", Compiler:"gc", Platform:"linux/amd64"}
+
+- List your running nodes
+
+  gcloud compute instances list
+
+  Result:
+  NAME ZONE MACHINE_TYPE PREEMPTIBLE INTERNAL_IP EXTERNAL_IP STATUS
+  gke-webfrontend-default-pool-e911037c-q17j us-central1-a n1-standard-1 10.128.0.3 34.72.147.15 RUNNING
+  gke-webfrontend-default-pool-e911037c-r9lc us-central1-a n1-standard-1 10.128.0.2 35.226.189.62 RUNNING
+
+3. Run and deploy a container
+
+   - Launch a single instance of the nginx container:
+
+     kubectl create deploy nginx --image=nginx:1.17.10
+
+   - View the pod running the nginx container:
+
+     kubectl get pods
+
+   - Expose the nginx container to the Internet:
+
+     kubectl expose deployment nginx --port 80 --type LoadBalancer
+
+   - View the new service:
+
+     kubectl get services
+
+     Result:
+     NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE
+     kubernetes ClusterIP 10.51.240.1 <none> 443/TCP 11m
+     nginx LoadBalancer 10.51.241.197 35.239.234.187 80:31096/TCP 2m56s
+
+   - Open a new web browser tab and paste your cluster's external IP address into the address bar. The default home page of the Nginx browser is displayed.
+
+   - Scale up the number of pods running on your service:
+
+     kubectl scale deployment nginx --replicas 3
+
+   - Confirm that Kubernetes has updated the number of pods:
+
+     kubectl get pods
+
+   - Confirm that your external IP address has not changed:
+
+     kubectl get services
+
+     Result:
+     NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE
+     kubernetes ClusterIP 10.51.240.1 <none> 443/TCP 14m
+     nginx LoadBalancer 10.51.241.197 35.239.234.187 80:31096/TCP 6m
 
 # Lab : Google Cloud Fundamentals: Getting Started with App Engine
 
@@ -173,9 +238,3 @@ n this lab, you learn how to perform the following tasks:
       Result: web page with 'Hello World'
 
 4.  Disable the application
-
-    -
-    -
-    -
-    -
-    -
